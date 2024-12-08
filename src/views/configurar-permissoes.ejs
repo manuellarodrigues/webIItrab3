@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Configurar Permissões</title>
+</head>
+<body>
+  <h1>Configuração de Permissões</h1>
+
+  <!-- form para configurar permissões -->
+  <form action="/api/usuarios/configurar-permissoes" method="POST">
+    <label for="usuarioId">Selecione o Usuário:</label>
+    <select id="usuarioId" name="usuarioId" required>
+      <% usuarios.forEach(usuario => { %>
+        <option value="<%= usuario.id %>"><%= usuario.nome %> (<%= usuario.email %>)</option>
+      <% }); %>
+    </select>
+    <br><br>
+
+    <label for="permissoes">Selecione as permissões:</label>
+    <div>
+      <% modulos.forEach(modulo => { %>
+        <label>
+          <input type="checkbox" name="permissoes" value="<%= modulo.nome %>">
+          <%= modulo.nome %>
+        </label><br>
+      <% }); %>
+    </div>
+    <br><br>
+    <button type="submit">Configurar Permissões</button>
+  </form>
+
+</body>
+</html>

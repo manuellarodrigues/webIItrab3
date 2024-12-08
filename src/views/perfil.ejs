@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><%= titulo %></title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background-color: #f4f4f4;
+      margin: 0;
+    }
+
+    h2 {
+      color: #333;
+    }
+
+    .perfil-container {
+      text-align: center;
+    }
+
+    .perfil-container img {
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+    }
+
+    .form-container {
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+  <div class="perfil-container">
+    <h2><%= titulo %></h2>
+    <img src="<%= imagemPerfil %>" alt="Imagem de perfil">
+    
+    <% if (papel === 'SUPER' || parseInt(usuarioLogadoId) === id) { %>
+      <div class="form-container">
+        <form action="/api/perfil/<%= id %>/imagem" method="POST" enctype="multipart/form-data">
+          <input type="file" name="imagem" accept="image/jpeg, image/png" required>
+          <button type="submit">Atualizar Imagem</button>
+        </form>
+      </div>
+    <% } else { %>
+      <p>Você não tem permissão para editar este perfil.</p>
+    <% } %>
+  </div>
+</body>
+</html>

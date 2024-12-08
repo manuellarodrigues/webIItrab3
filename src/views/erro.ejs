@@ -1,0 +1,45 @@
+<!-- views/erro.ejs -->
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Erro de Permissão</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background-color: #f8d7da;
+      margin: 0;
+    }
+
+    .erro-container {
+      text-align: center;
+    }
+
+    h1 {
+      color: #721c24;
+    }
+
+    p {
+      color: #721c24;
+    }
+
+    a {
+      color: #0056b3;
+      text-decoration: none;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <div class="erro-container">
+    <h1>Erro de Permissão</h1>
+    <p><%= mensagem %></p>
+    <a href="api/usuarios/dashboard">Voltar para o Dashboard</a>
+  </div>
+</body>
+</html>

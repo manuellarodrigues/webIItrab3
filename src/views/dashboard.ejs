@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard</title>
+
+  <!-- Estilos CSS diretamente no arquivo EJS -->
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      margin: 0;
+      padding: 0;
+    }
+
+    .container {
+      width: 80%;
+      margin: 20px auto;
+      background-color: white;
+      border-radius: 8px;
+      padding: 20px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    header h1 {
+      color: #333;
+    }
+
+    .content p {
+      font-size: 18px;
+      color: #666;
+    }
+
+    .logout {
+      margin-top: 20px;
+    }
+
+    .logout-button {
+      padding: 10px 15px;
+      background-color: #d9534f;
+      color: white;
+      border-radius: 5px;
+      text-decoration: none;
+    }
+
+    .logout-button:hover {
+      background-color: #c9302c;
+    }
+
+    .modules {
+      margin-top: 20px;
+    }
+
+    .modules ul {
+      list-style-type: none;
+      padding: 0;
+    }
+
+    .modules li {
+      background-color: #e9ecef;
+      margin-bottom: 10px;
+      padding: 10px;
+      border-radius: 5px;
+    }
+
+    .module-link {
+      color: #007bff;
+      text-decoration: none;
+      font-size: 16px;
+    }
+
+    .module-link:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Bem-vindo, <%= usuario.nome %>!</h1>
+    </header>
+    
+    <div class="content">
+      <p><strong>Seu papel:</strong> <%= usuario.papel %></p>
+      <p><strong>Email:</strong> <%= usuario.email %></p>
+      
+      <div class="logout">
+        <a href="/api/auth/logout" class="logout-button">Sair</a>
+      </div>
+    </div>
+
+    <div class="modules">
+      <h2>Módulos que você pode acessar:</h2>
+      <ul>
+        <% usuario.permissoes.forEach(modulo => { %>
+          <li><a href="/api/<%= modulo.nome.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, "") %>" class="module-link"><%= modulo.nome %></a></li>
+        <% }) %>
+      </ul>
+    </div>
+  </div>
+</body>
+</html>

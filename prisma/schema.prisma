@@ -1,0 +1,43 @@
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model Usuario {
+  id         Int        @id @default(autoincrement())
+  nome       String
+  email      String     @unique
+  senha      String
+  papel      String     @default("USER") // Valores válidos: "SUPER", "ADMIN", "USER" 
+  imagem     String? 
+  criadoEm   DateTime   @default(now())
+  permissoes Permissao[]
+  acessos    Acesso[]
+}
+
+model Modulo {
+  id         Int        @id @default(autoincrement())
+  nome       String     @unique
+  permissoes Permissao[]
+}
+
+model Permissao {
+  id         Int        @id @default(autoincrement())
+  usuarioId  Int
+  moduloId   Int
+  usuario    Usuario    @relation(fields: [usuarioId], references: [id])
+  modulo     Modulo     @relation(fields: [moduloId], references: [id])
+}
+
+model Acesso {
+  id         Int        @id @default(autoincrement())
+  usuarioId  Int
+  url        String
+  concedido  Boolean
+  dataHora   DateTime   @default(now())
+  usuario    Usuario    @relation(fields: [usuarioId], references: [id])
+}
